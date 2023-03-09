@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Trap
+    uniqueID: 1139344307
+    locked: 0
+  - name: Ground
+    uniqueID: 1214830303
+    locked: 0
+  - name: Player
+    uniqueID: 3587026251
+    locked: 0
