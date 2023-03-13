@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     public float moveSpeed;
     public Rigidbody2D rb;
 
+    private float movingInput;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +18,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+        movingInput = Input.GetAxisRaw("Horizontal");
+        rb.velocity = new Vector2(moveSpeed * movingInput, rb.velocity.y);
+        
     }
 }
