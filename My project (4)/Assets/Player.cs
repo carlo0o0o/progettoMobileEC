@@ -12,15 +12,28 @@ public class Player : MonoBehaviour
 
     private float movingInput;
 
+    private void Awake()
+    {
+        Debug.Log("Awake was called!");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
+    private void FixedUpdate()
+    {
+        Debug.Log("FixedUpdate was called!");
+    }
+
+
+
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Update was called!");
 
         movingInput = Input.GetAxis("Horizontal");
 
