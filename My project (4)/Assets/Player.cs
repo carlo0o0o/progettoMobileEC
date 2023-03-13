@@ -12,6 +12,11 @@ public class Player : MonoBehaviour
 
     private float movingInput;
 
+    public LayerMask whatIsGround;
+    public float groundCheckDistance;
+    private bool isGrounded;
+
+
     private void Awake()
     {
         Debug.Log("Awake was called!");
@@ -33,15 +38,26 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
+
         Debug.Log("Update was called!");
 
         movingInput = Input.GetAxis("Horizontal");
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-           rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            if(isGrounded)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            }
         }
         rb.velocity = new Vector2(moveSpeed * movingInput, rb.velocity.y);
         
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - groundCheckDistance));
+    }
+
 }
