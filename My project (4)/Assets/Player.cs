@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
     public float moveSpeed;
+    public float jumpForce;
+    
     public Rigidbody2D rb;
 
     private float movingInput;
@@ -18,7 +21,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movingInput = Input.GetAxisRaw("Horizontal");
+
+        movingInput = Input.GetAxis("Horizontal");
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+           rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        }
         rb.velocity = new Vector2(moveSpeed * movingInput, rb.velocity.y);
         
     }
