@@ -7,8 +7,9 @@ public class Player : MonoBehaviour
 
     public float moveSpeed;
     public float jumpForce;
-
     public Rigidbody2D rb;
+
+    private bool canDoubleJump = true;   //per il doppio salto
 
     private float movingInput;
 
@@ -42,17 +43,39 @@ public class Player : MonoBehaviour
 
         //Debug.Log("Update was called!");
 
-        movingInput = Input.GetAxis("Horizontal");
+        InputChecks();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (isGrounded)
         {
-            if (isGrounded)
-            {
-                Jump();
-            }
+            canDoubleJump = true;    //se non rimetto canDoubleJump true posso fare solo un avolta due salti
         }
+
+
         Move();
 
+    }
+
+    private void InputChecks()
+    {
+        movingInput = Input.GetAxis("Horizontal");
+
+        if (Input.GetKeyDown(KeyCode.Space))    // se space =1 chiamo jumpButton
+        {
+            jumpButton();
+        }
+    }
+
+    private void jumpButton()
+    {
+        if (isGrounded)
+        {
+            Jump();
+        }
+        else if (canDoubleJump)
+        {
+            canDoubleJump = false;
+            Jump();
+        }
     }
 
     private void Move()
