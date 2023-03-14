@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 
     public float moveSpeed;
     public float jumpForce;
-    
+
     public Rigidbody2D rb;
 
     private float movingInput;
@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     private void FixedUpdate()
@@ -38,21 +38,36 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
+        CollisionChecks();
 
-        Debug.Log("Update was called!");
+        //Debug.Log("Update was called!");
 
         movingInput = Input.GetAxis("Horizontal");
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(isGrounded)
+            if (isGrounded)
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                Jump();
             }
         }
+        Move();
+
+    }
+
+    private void Move()
+    {
         rb.velocity = new Vector2(moveSpeed * movingInput, rb.velocity.y);
-        
+    }
+
+    private void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+    }
+
+    private void CollisionChecks()
+    {
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
     }
 
     private void OnDrawGizmos()

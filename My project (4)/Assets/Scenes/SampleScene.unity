@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 63833687}
   - component: {fileID: 63833686}
   - component: {fileID: 63833689}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 649373010}
   - component: {fileID: 649373009}
   - component: {fileID: 649373008}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Platform (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,7 +509,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204503341}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.125, y: -1.065, z: 0}
+  m_LocalPosition: {x: 1.125, y: -1.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -531,6 +531,10 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 15
   rb: {fileID: 1204503346}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+  groundCheckDistance: 1.11
 --- !u!70 &1204503345
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
