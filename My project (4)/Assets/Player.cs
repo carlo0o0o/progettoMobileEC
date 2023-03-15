@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private Rigidbody2D rb;
+    private Animator anim;
 
+    [Header("Move info")]
     public float moveSpeed;
     public float jumpForce;
-    public Rigidbody2D rb;
 
     private bool canDoubleJump = true;   //per il doppio salto
 
     private float movingInput;
 
+    [Header("Collision info")]
     public LayerMask whatIsGround;
     public float groundCheckDistance;
     private bool isGrounded;
@@ -26,7 +29,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -39,6 +43,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool isMoving = rb.velocity.x != 0;
+
+        anim.SetBool("isMoving", isMoving);
+
         CollisionChecks();
 
         //Debug.Log("Update was called!");
