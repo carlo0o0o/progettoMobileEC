@@ -65,7 +65,16 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.1f);
         }
 
-        Move();
+        if (!isWallDetected)
+        {
+            isWallSliding = false;
+
+            Move();
+
+        }
+           
+
+        
     }
 
     private void AnimationControllers()
@@ -74,6 +83,7 @@ public class Player : MonoBehaviour
 
         anim.SetBool("isMoving", isMoving);
         anim.SetBool("isGrounded", isGrounded);
+        anim.SetBool("isWallSliding", isWallSliding);
         anim.SetFloat("yVelocity", rb.velocity.y);
     }
 
