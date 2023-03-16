@@ -18,7 +18,15 @@ public class Player : MonoBehaviour
     [Header("Collision info")]
     public LayerMask whatIsGround;
     public float groundCheckDistance;
+    public float wallCheckDistance;
     private bool isGrounded;
+    private bool isWallDetected;
+    private bool canWallSlide;
+    private bool isWallSliding;
+
+
+    private bool facingRight = true;
+    private int facingDirection = 1;
 
 
     private void Awake()
@@ -39,26 +47,25 @@ public class Player : MonoBehaviour
     }
 
 
-
     // Update is called once per frame
     void Update()
     {
         AnimationControllers();
-
+        FlipController();
         CollisionChecks();
-
-        //Debug.Log("Update was called!");
-
         InputChecks();
 
+
         if (isGrounded)
-        {
             canDoubleJump = true;    //se non rimetto canDoubleJump true posso fare solo un avolta due salti
+
+        if (canWallSlide)
+        {
+            isWallSliding = true;
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.1f);
         }
 
-
         Move();
-
     }
 
     private void AnimationControllers()
@@ -74,10 +81,11 @@ public class Player : MonoBehaviour
     {
         movingInput = Input.GetAxis("Horizontal");
 
+        if (Input.GetAxis("Vertical") < 0)
+            canWallSlide = false;
+
         if (Input.GetKeyDown(KeyCode.Space))    // se space =1 chiamo jumpButton
-        {
             jumpButton();
-        }
     }
 
     private void jumpButton()
@@ -103,14 +111,37 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
 
+    private void FlipController()
+    {
+        if(facingRight && movingInput < 0)
+            Flip();
+        else if(!facingRight && movingInput > 0)      
+            Flip();
+    }
+
+    private void Flip()
+    {
+        facingDirection = facingDirection * -1;   
+        facingRight = !facingRight;               //se e true diventa false e l'opposto
+        transform.Rotate(0, 180, 0);
+    }
+
     private void CollisionChecks()
     {
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
+        isWallDetected = Physics2D.Raycast(transform.position, Vector2.right * facingDirection, wallCheckDistance, whatIsGround);
+        
+        if(isWallDetected && rb.velocity.y < 0)   //se player sta precipitando
+            canWallSlide = true;
+
+        if (!isWallDetected)
+            canWallSlide = false;
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - groundCheckDistance));
+        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x + wallCheckDistance * facingDirection, transform.position.y));
     }
 
 }
