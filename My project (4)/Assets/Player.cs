@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Awake was called!");
+        //Debug.Log("Awake was called!");
     }
 
     // Start is called before the first frame update
@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log("FixedUpdate was called!");
+       // Debug.Log("FixedUpdate was called!");
     }
 
 
