@@ -10,7 +10,10 @@ public class Player : MonoBehaviour
     [Header("Move info")]
     public float moveSpeed;
     public float jumpForce;
+    public float doubleJumpForce;
     public Vector2 wallJumpDirection;
+
+    private float defaultJumpForce;
 
     private bool canDoubleJump = true;   //per il doppio salto
 
@@ -42,6 +45,8 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        defaultJumpForce = jumpForce;
     }
 
     private void FixedUpdate()
@@ -104,6 +109,7 @@ public class Player : MonoBehaviour
         if (isWallSliding)
         {
             WallJump();
+            canDoubleJump = true;
         }
 
         else if (isGrounded)
@@ -112,8 +118,11 @@ public class Player : MonoBehaviour
         }
         else if (canDoubleJump)
         {
+            canMove = true;
             canDoubleJump = false;
+            jumpForce = doubleJumpForce;
             Jump();
+            jumpForce = defaultJumpForce;
         }
         canWallSlide = false;
     }
