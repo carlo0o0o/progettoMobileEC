@@ -22,6 +22,10 @@ public class Player : MonoBehaviour
     [SerializeField] private float bufferJumpTime;
     private float bufferJumpCounter;
 
+    [SerializeField] private float cayoteJumpTime;
+    private float cayoteJumpCounter;
+    private bool canHaveCayoteJump;
+
 
     [Header("Collision info")]
     public LayerMask whatIsGround;
@@ -68,6 +72,7 @@ public class Player : MonoBehaviour
         InputChecks();
 
         bufferJumpCounter -= Time.deltaTime;
+        cayoteJumpCounter -= Time.deltaTime;
 
 
         if (isGrounded)
@@ -80,6 +85,18 @@ public class Player : MonoBehaviour
                 bufferJumpCounter = -1;
                 Jump();
             }
+
+            canHaveCayoteJump = true;
+
+        } 
+        else
+        {
+            if (canHaveCayoteJump)
+            {
+                canHaveCayoteJump = false;
+                cayoteJumpCounter = cayoteJumpTime;
+            }
+            
         }
 
         if (canWallSlide)
@@ -129,7 +146,7 @@ public class Player : MonoBehaviour
             canDoubleJump = true;
         }
 
-        else if (isGrounded)
+        else if (isGrounded || cayoteJumpCounter > 0)
         {
             Jump();
         }
