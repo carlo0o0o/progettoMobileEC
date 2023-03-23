@@ -13859,6 +13859,9 @@ MonoBehaviour:
   wallJumpDirection: {x: 5, y: 15}
   bufferJumpTime: 0.1
   cayoteJumpTime: 0.15
+  knockBackDirection: {x: 5, y: 10}
+  knockBackTime: 0.7
+  knockbackProtectionTime: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
