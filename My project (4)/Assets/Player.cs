@@ -19,6 +19,10 @@ public class Player : MonoBehaviour
 
     private float movingInput;
 
+    [SerializeField] private float bufferJumpTime;
+    private float bufferJumpCounter;
+
+
     [Header("Collision info")]
     public LayerMask whatIsGround;
     public float groundCheckDistance;
@@ -63,11 +67,19 @@ public class Player : MonoBehaviour
         CollisionChecks();
         InputChecks();
 
+        bufferJumpCounter -= Time.deltaTime;
+
 
         if (isGrounded)
         {
             canDoubleJump = true;    //se non rimetto canDoubleJump true posso fare solo un avolta due salti
             canMove = true;
+
+            if (bufferJumpCounter > 0)
+            {
+                bufferJumpCounter = -1;
+                Jump();
+            }
         }
 
         if (canWallSlide)
@@ -106,6 +118,11 @@ public class Player : MonoBehaviour
 
     private void jumpButton()
     {
+
+        if (!isGrounded)
+            bufferJumpCounter = bufferJumpTime;
+
+
         if (isWallSliding)
         {
             WallJump();

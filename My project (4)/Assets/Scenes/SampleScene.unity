@@ -13857,6 +13857,7 @@ MonoBehaviour:
   jumpForce: 15
   doubleJumpForce: 8
   wallJumpDirection: {x: 5, y: 15}
+  bufferJumpTime: 0.1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
