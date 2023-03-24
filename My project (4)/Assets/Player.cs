@@ -35,9 +35,11 @@ public class Player : MonoBehaviour
 
 
     [Header("Collision info")]
-    public LayerMask whatIsGround;
-    public float groundCheckDistance;
-    public float wallCheckDistance;
+    [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private float groundCheckDistance;
+    [SerializeField] private float wallCheckDistance;
+    [SerializeField] private Transform enemyCheck;
+    [SerializeField] private float enemyCheckRadius;
     private bool isGrounded;
     private bool isWallDetected;
     private bool canWallSlide;
@@ -81,6 +83,9 @@ public class Player : MonoBehaviour
         FlipController();
         CollisionChecks();
         InputChecks();
+        CheckForEnemy();
+
+
 
         bufferJumpCounter -= Time.deltaTime;
         cayoteJumpCounter -= Time.deltaTime;
@@ -118,8 +123,24 @@ public class Player : MonoBehaviour
 
         Move();
 
+    }
 
+    private void CheckForEnemy()
+    {
+        Collider2D[] hitedColliders = Physics2D.OverlapCircleAll(enemyCheck.position, enemyCheckRadius);
 
+        foreach (var enemy in hitedColliders)
+        {
+            if (enemy.GetComponent<Enemy>() != null)
+            {
+                if(rb.velocity.y < 0)
+                {
+                    enemy.GetComponent<Enemy>().Damage();
+                    Jump();
+                }
+                
+            }
+        }
     }
 
     private void AnimationControllers()
@@ -212,6 +233,8 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(wallJumpDirection.x * -facingDirection, wallJumpDirection.y);
     }
 
+
+
     private void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -251,6 +274,7 @@ public class Player : MonoBehaviour
     {
         Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - groundCheckDistance));
         Gizmos.DrawLine(transform.position, new Vector3(transform.position.x + wallCheckDistance * facingDirection, transform.position.y));
+        Gizmos.DrawWireSphere(enemyCheck.position, enemyCheckRadius);
     }
 
 }
