@@ -195,7 +195,7 @@ public class Player : MonoBehaviour
     }
 
 
-    public void Knockback(int direction)
+    public void Knockback(Transform damageTransform)
     {
         if (!canBeKnocked)
             return;
@@ -203,7 +203,15 @@ public class Player : MonoBehaviour
         isKnocked = true;
         canBeKnocked = false;
 
-        rb.velocity = new Vector2(knockBackDirection.x * direction, knockBackDirection.y);
+        #region Define horizontal direction for knockback
+        int hDirection = 0;
+        if (transform.position.x > damageTransform.position.x)
+            hDirection = 1;
+        else if (transform.position.x < damageTransform.position.x)
+            hDirection = -1;
+        #endregion
+
+        rb.velocity = new Vector2(knockBackDirection.x * hDirection, knockBackDirection.y);
 
         Invoke("CancelKnockback", knockBackTime);
         Invoke("AllowKnockback", knockbackProtectionTime);
