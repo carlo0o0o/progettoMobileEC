@@ -19,7 +19,12 @@ public class Enemy : MonoBehaviour
     protected bool wallDetected;
     protected bool groundDetected;
 
-    public bool invincible;
+    [HideInInspector] public bool invincible;
+
+    [Header("Move info")]
+    [SerializeField] protected float speed;
+    [SerializeField] protected float idleTime = 2;
+    protected float idleTimeCounter;
 
     protected virtual void Start()
     {
@@ -27,7 +32,23 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Damage()
+    protected virtual void WalkAround()
+    {
+        if (idleTimeCounter <= 0)
+            rb.velocity = new Vector2(speed * facingDirection, rb.velocity.y);
+        else
+            rb.velocity = new Vector2(0, rb.velocity.y);     //enemy mushroom
+
+        idleTimeCounter -= Time.deltaTime;
+
+        if (wallDetected || !groundDetected)
+        {
+            idleTimeCounter = idleTime;
+            Flip();
+        }
+    }
+
+    public virtual void Damage()
     {
         if(!invincible)
             anim.SetTrigger("gotHit");
