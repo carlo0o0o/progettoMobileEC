@@ -11,7 +11,7 @@ public class Enemy_Rino : Enemy
 
     [SerializeField] private LayerMask whatToIgnore;
     private RaycastHit2D playerDetection;
-    private bool aggresive;
+    
 
     protected override void Start()
     {

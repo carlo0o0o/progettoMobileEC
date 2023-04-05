@@ -26,6 +26,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float idleTime = 2;
     protected float idleTimeCounter;
 
+
+    protected bool canMove = true;
+    protected bool aggresive;
+
     protected virtual void Start()
     {
         anim = GetComponent<Animator>();
@@ -34,7 +38,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void WalkAround()
     {
-        if (idleTimeCounter <= 0)
+        if (idleTimeCounter <= 0 && canMove)
             rb.velocity = new Vector2(speed * facingDirection, rb.velocity.y);
         else
             rb.velocity = new Vector2(0, rb.velocity.y);     //enemy mushroom
@@ -50,8 +54,11 @@ public class Enemy : MonoBehaviour
 
     public virtual void Damage()
     {
-        if(!invincible)
+        if (!invincible)
+        {
+            canMove = false;
             anim.SetTrigger("gotHit");
+        }
     }
 
     public void DestroyMe()
@@ -59,7 +66,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.GetComponent<Player>() != null)
         {
@@ -82,7 +89,10 @@ public class Enemy : MonoBehaviour
 
     protected virtual void OnDrawGizmos()
     {
-        Gizmos.DrawLine(groundCheck.position , new Vector2(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
-        Gizmos.DrawLine(wallCheck.position, new Vector2(wallCheck.position.x + wallCheckDistance * facingDirection, wallCheck.position.y));
+        if(groundCheck != null) 
+            Gizmos.DrawLine(groundCheck.position , new Vector2(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
+        
+        if(wallCheck != null)
+            Gizmos.DrawLine(wallCheck.position, new Vector2(wallCheck.position.x + wallCheckDistance * facingDirection, wallCheck.position.y));
     }
 }
