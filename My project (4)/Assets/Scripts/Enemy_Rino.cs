@@ -9,8 +9,8 @@ public class Enemy_Rino : Enemy
     [SerializeField] private float shockTime;
                      private float shockTimeCounter;
 
-    [SerializeField] private LayerMask whatToIgnore;
-    private RaycastHit2D playerDetection;
+   // [SerializeField] private LayerMask whatToIgnore;
+    
     
 
     protected override void Start()
@@ -24,7 +24,7 @@ public class Enemy_Rino : Enemy
     {
 
 
-        playerDetection = Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, 25, ~whatToIgnore);
+        
         if (playerDetection.collider.GetComponent<Player>() != null)
             aggresive = true;
 
@@ -63,11 +63,5 @@ public class Enemy_Rino : Enemy
         anim.SetFloat("xVelocity", rb.velocity.x);
     }
 
-    protected override void OnDrawGizmos()
-    {
-        base.OnDrawGizmos();
-
-        Gizmos.DrawLine(wallCheck.position, new Vector2(wallCheck.position.x + playerDetection.distance * facingDirection, wallCheck.position.y));
-        
-    }
+    
 }
