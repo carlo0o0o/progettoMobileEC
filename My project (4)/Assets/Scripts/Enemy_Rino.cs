@@ -9,7 +9,7 @@ public class Enemy_Rino : Enemy
     [SerializeField] private float shockTime;
                      private float shockTimeCounter;
 
-   // [SerializeField] private LayerMask whatToIgnore;
+    [SerializeField] private LayerMask whatToIgnore;
     
     
 
