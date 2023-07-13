@@ -28,6 +28,8 @@ public class Bullet : Trap
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
+
+
         base.OnTriggerEnter2D(collision);
         Destroy(gameObject);
     }

@@ -20,6 +20,8 @@ public class Enemy : Trap    //sarebbe danger ma lasciamo trap
     protected bool wallDetected;
     protected bool groundDetected;
 
+    protected Transform player;
+
     [HideInInspector] public bool invincible;
 
     [Header("Move info")]
@@ -35,6 +37,8 @@ public class Enemy : Trap    //sarebbe danger ma lasciamo trap
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+
+        player = PlayerManager.instance.currentPlayer.transform;
 
         if (groundCheck == null)
             groundCheck = transform;

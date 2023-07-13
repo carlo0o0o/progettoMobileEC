@@ -7,9 +7,10 @@ public class PlayerManager : MonoBehaviour
 
     public static PlayerManager instance;
 
+    public Transform respawnPoint;
+    public GameObject currentPlayer;
+
     [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private Transform respawnPoint;
-                     public GameObject currentPlayer;
 
     private void Awake()
     {
@@ -18,7 +19,7 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    private void PlayerRespawn()
+    public void PlayerRespawn()
     {
         if (currentPlayer == null)
             currentPlayer = Instantiate(playerPrefab, respawnPoint.position, transform.rotation);
