@@ -205,6 +205,8 @@ public class Player : MonoBehaviour
         if (!canBeKnocked)
             return;
 
+        //GetComponent<CameraShakeFX>().ScreenShake(-facingDirection);    //shake camera
+
         isKnocked = true;
         canBeKnocked = false;
 
