@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
+    public int fruits;
+
     [Header("Move info")]
     public float moveSpeed;
     public float jumpForce;
@@ -205,6 +207,12 @@ public class Player : MonoBehaviour
     {
         if (!canBeKnocked)
             return;
+
+        fruits--;
+        if(fruits < 0)
+        {
+            Destroy(gameObject);
+        }
 
         //GetComponent<CameraShakeFX>().ScreenShake(-facingDirection);    //shake camera
 
