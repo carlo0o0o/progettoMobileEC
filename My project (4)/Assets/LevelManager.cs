@@ -7,9 +7,8 @@ public class LevelManager : MonoBehaviour
 {
     public string sceneToLoad;
 
-    private void Update()
+    public void LoadLevel(string sceneName)
     {
-        if(Input.GetKeyDown(KeyCode.N))
-            SceneManager.LoadScene(sceneToLoad);
+        SceneManager.LoadScene(sceneName);
     }
 }
