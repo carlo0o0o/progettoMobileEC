@@ -2,13 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
-    public string sceneToLoad;
+    [SerializeField] private GameObject levelButton;
+    [SerializeField] private Transform levelButtonParent;
 
-    public void LoadLevel(string sceneName)
+    private void Start()
     {
-        SceneManager.LoadScene(sceneName);
+        for(int i = 1; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+            string sceneName = "Level " + i;
+            Debug.Log(sceneName);
+
+            GameObject newButton = Instantiate(levelButton, levelButtonParent);
+            newButton.AddComponent<Button>().onClick.AddListener(() => LoadLevel(sceneName));
+            newButton.GetComponentInChildren<TextMeshProUGUI>().text = sceneName;
+        }
     }
+
+    public void LoadLevel(string sceneName) => SceneManager.LoadScene(sceneName);
+   
 }
