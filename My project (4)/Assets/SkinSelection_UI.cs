@@ -12,6 +12,11 @@ public class SkinSelection_UI : MonoBehaviour
     [SerializeField] private bool[] skinPurchased;
     [SerializeField] private int[] priceForSkin;
 
+    private void Start()
+    {
+        skinPurchased[0] = true;
+    }
+
     private void SetUpSkinInfo()
     {
         equpButton.SetActive(skinPurchased[skin_Id]);
@@ -48,8 +53,9 @@ public class SkinSelection_UI : MonoBehaviour
         SetUpSkinInfo();
     }
 
-    public void Equip()
+    public void Select()
     {
+        PlayerManager.instance.chosenSkinId = skin_Id;
         Debug.Log("Skin was equiped");
     }
 
