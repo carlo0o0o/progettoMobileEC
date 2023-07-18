@@ -16,8 +16,10 @@ public class StartPoint : MonoBehaviour
     {
         if (collision.GetComponent<Player>() != null)
         {
+            if (!GameManager.instance.startTime)
+                GameManager.instance.startTime = true;
 
-            if(collision.transform.position.x > transform.position.x)
+            if (collision.transform.position.x > transform.position.x)
                 GetComponent<Animator>().SetTrigger("touch");
         }
     }

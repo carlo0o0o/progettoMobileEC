@@ -5494,10 +5494,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1687623937}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58147f7963b6c6147bb5c388ab8e3165, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e2fccd9d132b3b419cec8d22b89280a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 0
+  difficulty: 2
+  timer: 0
+  startTime: 0
+  levelNumber: 1
 --- !u!4 &1687623939
 Transform:
   m_ObjectHideFlags: 0
@@ -8329,6 +8332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4814e8f14608ff74981a9a2fca089e85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fruits: 0
   respawnPoint: {fileID: 0}
   currentPlayer: {fileID: 0}
   chosenSkinId: 0
