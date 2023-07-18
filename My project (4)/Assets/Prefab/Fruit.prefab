@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7018168702191992143}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.76, y: -5.77, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f9a0a99d0507a48873464a9de20cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 7018168702191992138}
   sr: {fileID: 7018168702191992140}
   myFruitType: 0
   fruitImage:
