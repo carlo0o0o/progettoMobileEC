@@ -6,7 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
 
     public static PlayerManager instance;
-
+    public int fruits;
     public Transform respawnPoint;
     public GameObject currentPlayer;
 
