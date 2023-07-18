@@ -11,10 +11,13 @@ public class SkinSelection_UI : MonoBehaviour
     [SerializeField] private int skin_Id;
     [SerializeField] private bool[] skinPurchased;
     [SerializeField] private int[] priceForSkin;
+    [SerializeField] private TextMeshProUGUI bankText;
 
     private void Start()
     {
         skinPurchased[0] = true;
+
+        bankText.text = PlayerPrefs.GetInt("TotalFruitsCollected").ToString();
     }
 
     private void SetUpSkinInfo()

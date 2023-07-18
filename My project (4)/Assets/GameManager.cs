@@ -54,4 +54,15 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetFloat("Level" + levelNumber + "BestTime", timer);
         timer = 0;
     }
+
+    public void SaveCollectedFruits()
+    {
+        int totalFruits = PlayerPrefs.GetInt("TotalFruitsCollected");
+        int newTotalFruit = totalFruits + PlayerManager.instance.fruits;
+
+        PlayerPrefs.SetInt("TotalFruitsCollected", newTotalFruit);
+        PlayerPrefs.SetInt("Level" + levelNumber + "FruitsCollected", PlayerManager.instance.fruits);
+
+        PlayerManager.instance.fruits = 0;
+    }
 }

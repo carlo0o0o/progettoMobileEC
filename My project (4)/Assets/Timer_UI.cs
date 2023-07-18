@@ -5,9 +5,13 @@ using TMPro;
 
 public class Timer_UI : MonoBehaviour
 {
-    private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI currentFruitsAmout;
 
-    void Start() => timerText = GetComponent<TextMeshProUGUI>();
 
-    void Update() => timerText.text = "Timer: " + GameManager.instance.timer.ToString("00") + " s";
+    void Update()
+    {
+        timerText.text = "Timer: " + GameManager.instance.timer.ToString("00") + " s";
+        currentFruitsAmout.text = PlayerManager.instance.fruits.ToString();
+    }
 }
