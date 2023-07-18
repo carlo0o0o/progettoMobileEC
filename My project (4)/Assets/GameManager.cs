@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     public void SaveBestTime()
     {
         startTime = false;
-        float lastTime = PlayerPrefs.GetFloat("Level" + levelNumber + "BestTime");
+        float lastTime = PlayerPrefs.GetFloat("Level" + levelNumber + "BestTime", 999);
         if(timer < lastTime)
             PlayerPrefs.SetFloat("Level" + levelNumber + "BestTime", timer);
         timer = 0;

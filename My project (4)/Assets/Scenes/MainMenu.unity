@@ -3472,13 +3472,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a69d9014e6592843a824ba6e5f46f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buyButton: {fileID: 1733074204}
-  equpButton: {fileID: 1226755252}
-  anim: {fileID: 162648100}
-  skin_Id: 0
-  skinPurchased: 00000000
   priceForSkin: 0000000032000000fa000000f4010000
+  skinPurchased: 00000000
   bankText: {fileID: 1622775653}
+  buyButton: {fileID: 1733074204}
+  selectButton: {fileID: 1226755252}
+  anim: {fileID: 162648100}
 --- !u!1 &1131350935
 GameObject:
   m_ObjectHideFlags: 0
