@@ -19,12 +19,16 @@ public class Player : MonoBehaviour
 
     private float movingInput;
 
+    private bool canBeControlled;
+
     [SerializeField] private float bufferJumpTime;
     private float bufferJumpCounter;
 
     [SerializeField] private float cayoteJumpTime;
     private float cayoteJumpCounter;
     private bool canHaveCayoteJump;
+
+    private float defaultGravityScale;
 
     [Header("Knockback info")]
     [SerializeField] private Vector2 knockBackDirection;
@@ -65,6 +69,9 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
 
         defaultJumpForce = jumpForce;
+
+        defaultGravityScale = rb.gravityScale;
+        rb.gravityScale = 0;
     }
 
     private void FixedUpdate()
@@ -158,18 +165,27 @@ public class Player : MonoBehaviour
         anim.SetBool("isGrounded", isGrounded);
         anim.SetBool("isWallSliding", isWallSliding);
         anim.SetBool("isWallDetected", isWallDetected);
+        anim.SetBool("canBeControlled", canBeControlled);
         anim.SetFloat("yVelocity", rb.velocity.y);
     }
 
     private void InputChecks()
     {
         movingInput = Input.GetAxis("Horizontal");
+        if (!canBeControlled)
+            return;
 
         if (Input.GetAxis("Vertical") < 0)
             canWallSlide = false;
 
         if (Input.GetKeyDown(KeyCode.Space))    // se space =1 chiamo jumpButton
             jumpButton();
+    }
+
+    public void ReturnControll()
+    {
+        rb.gravityScale = defaultGravityScale;
+        canBeControlled = true;
     }
 
     private void jumpButton()
