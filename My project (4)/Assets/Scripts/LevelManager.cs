@@ -29,6 +29,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadLevel(string sceneName)
     {
+        AudioManager.instance.PlaySFX(5);
         GameManager.instance.SaveGameDifficulty();
         SceneManager.LoadScene(sceneName);
     }

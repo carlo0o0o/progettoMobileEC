@@ -135,6 +135,7 @@ public class Player : MonoBehaviour
 
     private void CheckForEnemy()
     {
+
         Collider2D[] hitedColliders = Physics2D.OverlapCircleAll(enemyCheck.position, enemyCheckRadius);
 
         foreach (var enemy in hitedColliders)
@@ -148,6 +149,7 @@ public class Player : MonoBehaviour
 
                 if(rb.velocity.y < 0)
                 {
+                    AudioManager.instance.PlaySFX(1);
                     newEnemy.Damage();
                     Jump();
                 }
@@ -219,6 +221,7 @@ public class Player : MonoBehaviour
 
     public void Knockback(Transform damageTransform)
     {
+        AudioManager.instance.PlaySFX(10);
         if (!canBeKnocked)
             return;
 
@@ -275,6 +278,7 @@ public class Player : MonoBehaviour
 
     private void WallJump()
     {
+        AudioManager.instance.PlaySFX(13);
         canMove = false;
         rb.velocity = new Vector2(wallJumpDirection.x * -facingDirection, wallJumpDirection.y);
     }
@@ -283,6 +287,7 @@ public class Player : MonoBehaviour
 
     private void Jump()
     {
+        AudioManager.instance.PlaySFX(4);
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
 

@@ -81,13 +81,15 @@ public class PlayerManager : MonoBehaviour
     }
     public void RespawnPlayer()
     {
-        if (currentPlayer == null)
-        currentPlayer = Instantiate(playerPrefab, respawnPoint.position, transform.rotation);
-        
+        if (currentPlayer == null) { 
+            AudioManager.instance.PlaySFX(12);
+            currentPlayer = Instantiate(playerPrefab, respawnPoint.position, transform.rotation);
+        }
     }
 
     public void KillPlayer()
     {
+        AudioManager.instance.PlaySFX(0);
         GameObject newDeathFx = Instantiate(deathFX, currentPlayer.transform.position, currentPlayer.transform.rotation);
         Destroy(newDeathFx, .4f);
         Destroy(currentPlayer);
