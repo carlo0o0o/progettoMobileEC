@@ -61,11 +61,11 @@ public class PlayerManager : MonoBehaviour
 
     private void PermanentDeath()
     {
-         if (GameManager.instance.difficulty< 3)
-         {
-            Invoke("RespawnPlayer", 1);
-         }
-         else
+         //if (GameManager.instance.difficulty< 3)
+         //{
+          //  Invoke("RespawnPlayer", 1);
+         //}
+         //else
             inGameUI.onDeath();
             
     }
@@ -82,7 +82,8 @@ public class PlayerManager : MonoBehaviour
     public void RespawnPlayer()
     {
         if (currentPlayer == null)
-            currentPlayer = Instantiate(playerPrefab, respawnPoint.position, transform.rotation);
+        currentPlayer = Instantiate(playerPrefab, respawnPoint.position, transform.rotation);
+        
     }
 
     public void KillPlayer()

@@ -222,8 +222,8 @@ public class Player : MonoBehaviour
         if (!canBeKnocked)
             return;
 
-        if (GameManager.instance.difficulty > 1)         //solo se la difficolta non è la piu semplice
-        {
+        //if (GameManager.instance.difficulty > 1)         //solo se la difficolta non è la piu semplice
+        //{
             //PlayerManager.instance.fruits--;
 
             //if(PlayerManager.instance.fruits < 0)
@@ -233,7 +233,7 @@ public class Player : MonoBehaviour
 
             PlayerManager.instance.OnTakingDamege();
 
-        }
+        //}
 
 
         //GetComponent<CameraShakeFX>().ScreenShake(-facingDirection);    //shake camera
