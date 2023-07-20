@@ -6,14 +6,12 @@ public class StartPoint : MonoBehaviour
 {
     [SerializeField] private Transform respPoint;
 
-    private void Awake()
-    {
-        PlayerManager.instance.respawnPoint = respPoint;
-        PlayerManager.instance.RespawnPlayer();
-    }
+
 
     private void Start()
     {
+        PlayerManager.instance.respawnPoint = respPoint;
+        PlayerManager.instance.RespawnPlayer();
         AudioManager.instance.PlayRandomBGM();
     }
 

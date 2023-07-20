@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+
+
 
 public class Timer_UI : MonoBehaviour  //InGame_UI
 {
@@ -14,6 +17,10 @@ public class Timer_UI : MonoBehaviour  //InGame_UI
     [SerializeField] private GameObject pauseUI;
     [SerializeField] private GameObject endLevelUI;
 
+    [Header("Controlls")]
+    [SerializeField] private VariableJoystick joystick;
+    [SerializeField] private Button jumpButton;
+
     [Header("Text Components")]
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI currentFruitsAmout;
@@ -22,13 +29,18 @@ public class Timer_UI : MonoBehaviour  //InGame_UI
     [SerializeField] private TextMeshProUGUI endBestTimeText;
     [SerializeField] private TextMeshProUGUI endFruitsText;
 
+    private void Awake()
+    {
+        PlayerManager.instance.inGameUI = this;
+
+    }
 
     private void Start()
     {
         GameManager.instance.levelNumber = SceneManager.GetActiveScene().buildIndex;
-        PlayerManager.instance.inGameUI = this;
         Time.timeScale = 1;
         SwitchUI(inGameUI);
+        
     }
 
     void Update()
@@ -38,6 +50,14 @@ public class Timer_UI : MonoBehaviour  //InGame_UI
         if (Input.GetKeyDown(KeyCode.Escape))
             CheckIsNotPaused();
 
+    }
+
+    public void AssignPlayerControlls(Player player)
+    {
+        player.joystick = joystick;
+
+        //jumpButton.onClick.RemoveAllListeners();
+        //jumpButton.onClick.AddListener(player.JumpButton);
     }
 
     private bool CheckIsNotPaused()

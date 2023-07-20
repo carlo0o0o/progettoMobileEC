@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
+    [SerializeField] private bool pcTesting;
+
     [Header("Move info")]
     public float moveSpeed;
     public float jumpForce;
@@ -17,7 +19,7 @@ public class Player : MonoBehaviour
 
     private bool canDoubleJump = true;   //per il doppio salto
 
-    private float movingInput;
+    
 
     private bool canBeControlled;
 
@@ -55,6 +57,12 @@ public class Player : MonoBehaviour
     private bool canMove;
 
     private int facingDirection = 1;
+
+    [Header("Controlls info")]
+    public VariableJoystick joystick;
+    private float movingInput;
+    private float vInput;
+
 
 
     private void Awake()
@@ -173,15 +181,25 @@ public class Player : MonoBehaviour
 
     private void InputChecks()
     {
-        movingInput = Input.GetAxis("Horizontal");
         if (!canBeControlled)
             return;
 
-        if (Input.GetAxis("Vertical") < 0)
+        if (pcTesting)
+        {
+            movingInput = Input.GetAxisRaw("Horizontal");
+            vInput = Input.GetAxisRaw("Vertical");
+
+        }
+        else
+        {
+            movingInput = joystick.Horizontal;
+            vInput = joystick.Vertical;
+        }
+        if (vInput < 0)
             canWallSlide = false;
 
         if (Input.GetKeyDown(KeyCode.Space))    // se space =1 chiamo jumpButton
-            jumpButton();
+            JumpButton();
     }
 
     public void ReturnControll()
@@ -190,7 +208,7 @@ public class Player : MonoBehaviour
         canBeControlled = true;
     }
 
-    private void jumpButton()
+    public void JumpButton()
     {
 
         if (!isGrounded)

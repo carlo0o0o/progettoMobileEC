@@ -84,6 +84,7 @@ public class PlayerManager : MonoBehaviour
         if (currentPlayer == null) { 
             AudioManager.instance.PlaySFX(12);
             currentPlayer = Instantiate(playerPrefab, respawnPoint.position, transform.rotation);
+            inGameUI.AssignPlayerControlls(currentPlayer.GetComponent<Player>());
         }
     }
 
