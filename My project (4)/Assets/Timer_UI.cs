@@ -26,6 +26,7 @@ public class Timer_UI : MonoBehaviour  //InGame_UI
     private void Start()
     {
         GameManager.instance.levelNumber = SceneManager.GetActiveScene().buildIndex;
+        PlayerManager.instance.inGameUI = this;
         Time.timeScale = 1;
         SwitchUI(inGameUI);
     }
@@ -56,6 +57,8 @@ public class Timer_UI : MonoBehaviour  //InGame_UI
             return false;
         }
     }
+
+    public void onDeath() => SwitchUI(pauseUI);
 
     public void OnLevelFinished()
     {

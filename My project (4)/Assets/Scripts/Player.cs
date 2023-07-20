@@ -222,35 +222,37 @@ public class Player : MonoBehaviour
         if (!canBeKnocked)
             return;
 
-        if (GameManager.instance.difficulty > 1)
+        if (GameManager.instance.difficulty > 1)         //solo se la difficolta non è la piu semplice
         {
-            PlayerManager.instance.fruits--;
+            //PlayerManager.instance.fruits--;
 
-            if(PlayerManager.instance.fruits < 0)
-            {
-                Destroy(gameObject);
-            }
+            //if(PlayerManager.instance.fruits < 0)
+            //{
+            //    PlayerManager.instance.KillPlayer();
+            //}
+
+            PlayerManager.instance.OnTakingDamege();
 
         }
 
 
         //GetComponent<CameraShakeFX>().ScreenShake(-facingDirection);    //shake camera
 
-        isKnocked = true;
-        canBeKnocked = false;
+        //isKnocked = true;
+        //canBeKnocked = false;
 
-        #region Define horizontal direction for knockback
-        int hDirection = 0;
-        if (transform.position.x > damageTransform.position.x)
-            hDirection = 1;
-        else if (transform.position.x < damageTransform.position.x)
-            hDirection = -1;
-        #endregion
+        //#region Define horizontal direction for knockback
+        //int hDirection = 0;
+        //if (transform.position.x > damageTransform.position.x)
+        //    hDirection = 1;
+        //else if (transform.position.x < damageTransform.position.x)
+        //    hDirection = -1;
+        //#endregion
 
-        rb.velocity = new Vector2(knockBackDirection.x * hDirection, knockBackDirection.y);
+        //rb.velocity = new Vector2(knockBackDirection.x * hDirection, knockBackDirection.y);
 
-        Invoke("CancelKnockback", knockBackTime);
-        Invoke("AllowKnockback", knockbackProtectionTime);
+        //Invoke("CancelKnockback", knockBackTime);
+        //Invoke("AllowKnockback", knockbackProtectionTime);
     }
 
     private void CancelKnockback()
