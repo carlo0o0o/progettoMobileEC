@@ -5,7 +5,16 @@ using UnityEngine.UI;
 
 public class MainMenu_UI : MonoBehaviour
 {
+    //[SerializeField] private GameObject continueButton;
+    [SerializeField] private VolumeController_UI[] volumeController;
 
+    private void Start()
+    {
+        //for(int i = 0; i<volumeController.Length; i++)
+        //{
+            //volumeController[i].GetComponent<VolumeController_UI>().SetUpVolumeSlider();
+        //}
+    }
 
     public void SwitchMenuTo(GameObject uiMenu)
     {
