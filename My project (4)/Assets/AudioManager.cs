@@ -10,6 +10,16 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource[] sfx;
     [SerializeField] private AudioSource[] bgm;
 
+    private int bgmIndex;
+
+    private void Update()
+    {
+        if (!bgm[bgmIndex].isPlaying)
+        {
+            bgm[bgmIndex].Play();
+        }
+    }
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -46,6 +56,13 @@ public class AudioManager : MonoBehaviour
             bgm[i].Stop();
         }
         bgm[bgmToPlay].Play();
+    }
+
+    public void PlayRandomBGM()
+    {
+        bgmIndex = Random.Range(0, bgm.Length);
+
+        PlayBGM(bgmIndex);
     }
 
 }

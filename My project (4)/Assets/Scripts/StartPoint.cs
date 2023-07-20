@@ -12,6 +12,11 @@ public class StartPoint : MonoBehaviour
         PlayerManager.instance.RespawnPlayer();
     }
 
+    private void Start()
+    {
+        AudioManager.instance.PlayRandomBGM();
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.GetComponent<Player>() != null)
