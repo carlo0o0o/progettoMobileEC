@@ -12,6 +12,10 @@ public class StartPoint : MonoBehaviour
     {
         PlayerManager.instance.respawnPoint = respPoint;
         PlayerManager.instance.RespawnPlayer();
+
+        PlayerManager.instance.fruits = 0;
+        GameManager.instance.timer = 0;
+
         AudioManager.instance.PlayRandomBGM();
     }
 

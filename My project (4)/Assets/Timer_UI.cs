@@ -56,8 +56,13 @@ public class Timer_UI : MonoBehaviour  //InGame_UI
     {
         player.joystick = joystick;
 
-        //jumpButton.onClick.RemoveAllListeners();
-        //jumpButton.onClick.AddListener(player.JumpButton);
+        jumpButton.onClick.RemoveAllListeners();
+        jumpButton.onClick.AddListener(player.JumpButton);
+    }
+
+    public void PauseButton()
+    {
+        CheckIsNotPaused();
     }
 
     private bool CheckIsNotPaused()
@@ -100,6 +105,11 @@ public class Timer_UI : MonoBehaviour  //InGame_UI
         }
 
         uiMenu.SetActive(true);
+        if(uiMenu == inGameUI)
+        {
+            joystick.gameObject.SetActive(true);
+            jumpButton.gameObject.SetActive(true);
+        }
     }
 
     public void LoadMainMenu() => SceneManager.LoadScene("MainMenu");
